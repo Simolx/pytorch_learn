@@ -50,4 +50,4 @@ RUN mkdir /opt/notebooks
 
 VOLUME [ "/opt/notebooks" ]
 
-CMD [ "/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/opt/notebooks", "--ip='*'", "--port=8888", "--no-browser", "--allow-root" ]
+CMD [ "/opt/conda/bin/jupyter", "lab", "--notebook-dir=/opt/notebooks", "--ip='*'", "--port=8888", "--no-browser", "--allow-root" ]

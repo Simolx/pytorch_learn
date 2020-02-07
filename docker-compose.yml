@@ -11,3 +11,4 @@ services:
       - ./volumes/server/notebooks:/opt/notebooks:rw
     ports:
       - "8888:8888"
+#    command:  "/opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
