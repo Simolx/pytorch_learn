@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  server:
+    build:
+      context: server
+      # uncomment following lines for team edition or change UID/GID
+    restart: unless-stopped
+    volumes:
+      - ./volumes/server/notebooks:/opt/notebooks:rw
+    ports:
+      - "8888:8888"
