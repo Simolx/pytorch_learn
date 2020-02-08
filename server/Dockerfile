@@ -1,12 +1,8 @@
 FROM debian:latest
 
-#  $ docker build . -t continuumio/anaconda3:latest -t continuumio/anaconda3:5.3.0
-#  $ docker run --rm -it continuumio/anaconda3:latest /bin/bash
-#  $ docker push continuumio/anaconda3:latest
-#  $ docker push continuumio/anaconda3:5.3.0
-
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 TERM=xterm 
-ENV PATH /opt/conda/bin:$PATH
+ENV NODE_VERSION=v12.15.0
+ENV PATH /opt/conda/bin:/opt/node-linux/bin:$PATH
 
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
@@ -44,7 +40,11 @@ RUN conda install -c conda-forge twine && \
     conda clean --all -y
 
 RUN pip install --no-cache-dir nbdev
-    
+
+RUN wget --quiet https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz -O ~/node-linux-x64.tar.xz && \
+    mkdir /opt/node-linux && \
+    tar -xJvf ~/node-linux-x64.tar.xz -C /opt/node-linux --strip-components 1 && \
+    rm -f ~/node-linux-x64.tar.xz
 
 RUN mkdir /opt/notebooks
 
